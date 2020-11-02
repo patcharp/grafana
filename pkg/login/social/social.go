@@ -65,17 +65,7 @@ const (
 var (
 	SocialBaseUrl = "/login/"
 	SocialMap     = make(map[string]SocialConnector)
-	allOauthes    = []string{
-		"github",
-		"gitlab",
-		"google",
-		"generic_oauth",
-		"one_id",
-		"grafananet",
-		grafanaCom,
-		"azuread",
-		"okta",
-	}
+	allOauthes    = []string{"github", "gitlab", "google", "generic_oauth", "one_id", "grafananet", grafanaCom, "azuread", "okta"}
 )
 
 func newSocialBase(name string, config *oauth2.Config, info *setting.OAuthInfo) *SocialBase {
