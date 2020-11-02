@@ -65,7 +65,7 @@ const (
 var (
 	SocialBaseUrl = "/login/"
 	SocialMap     = make(map[string]SocialConnector)
-	allOauthes    = []string{"github", "gitlab", "google", "generic_oauth", "grafananet", grafanaCom, "azuread", "okta"}
+	allOauthes    = []string{"github", "gitlab", "google", "generic_oauth", "one_id", "grafananet", grafanaCom, "azuread", "okta"}
 )
 
 func newSocialBase(name string, config *oauth2.Config, info *setting.OAuthInfo) *SocialBase {
@@ -188,6 +188,17 @@ func NewOAuthService() {
 				teamIds:              sec.Key("team_ids").Ints(","),
 				allowedOrganizations: util.SplitString(sec.Key("allowed_organizations").String()),
 			}
+		}
+
+		// TODO: Add one id configuration definition here
+		if name == "one_id" {
+			SocialMap["one_id"] = &SocialOneIdOAuth{
+				SocialBase: newSocialBase(name, &config, info),
+				apiUrl:     info.ApiUrl,
+				teamIds:    nil,
+			}
+			config.RedirectURL = ""
+			config.Scopes = []string{}
 		}
 
 		if name == grafanaCom {

@@ -46,6 +46,11 @@ const loginServices: () => LoginServices = () => {
       icon: 'sign-in',
       hrefName: 'generic_oauth',
     },
+    one_id: {
+      enabled: oauthEnabled && config.oauth.one_id,
+      name: 'One ID',
+      hrefName: 'one_id',
+    },
   };
 };
 
